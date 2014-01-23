@@ -41,7 +41,8 @@ ofSSLManager::ofSSLManager():
 
 ofSSLManager::~ofSSLManager()
 {
-    Poco::Net::SSLManager::instance().shutdown();
+//    // TODO: required if ssl manager is not integrated into the core
+//    Poco::Net::SSLManager::instance().shutdown();
 }
 
 
