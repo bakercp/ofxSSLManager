@@ -196,8 +196,10 @@ public:
     ///        A listener might call this class in the ofBaseApp::setup()
     ///        method like this:
     ///
-    ///   ofSSLManager::registerServerEvents(this);
-    ///    template<class ListenerClass>
+    /// ~~~{.cpp}
+    ///     ofSSLManager::registerServerEvents(this);
+    /// ~~~
+    template<class ListenerClass>
     static void registerServerEvents(ListenerClass* listener);
 
     /// \brief Unregister the listener class for all Server SSL events.
