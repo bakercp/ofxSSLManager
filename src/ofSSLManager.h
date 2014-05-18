@@ -42,51 +42,53 @@
 
 
 /// \brief A class to simplify client and server SSL Context management.
-/// \details Default OpenSSL security contexts are represented by the
-///         Poco::Net:Context class and managed by the managed by the
-///         Poco::Net::SSLManager class.  Poco Sockets, Streams and Sessions
-///         can be explicity instantiated with a Poco::Net::Context or
-///         they can (more conveniently) employ a default SSL Client or
-///         Server Context.  For applications that implement
-///         Poco::Util::Application, default Context setup and configuration
-///         trivially done via config files. But, since ofBaseApp does not
-///         extend Poco::Util::Application, special care must be taken when
-///         creating and using Poco's default Client and Server Contexts.
 ///
-///         ofSSLManager adds a layer between the openFrameworks user and
-///         the Poco::Net::SSLManager to ensure that the default contexts
-///         are configured in an openFrameworks-friendly way (e.g. providing
-///         a default location for certificate authority files, SSL
-///         certificate and Private Key files, the default security settings
-///         and mechanisms for registering SSL verification event callbacks.
+/// Default OpenSSL security contexts are represented by the
+/// Poco::Net:Context class and managed by the managed by the
+/// Poco::Net::SSLManager class.  Poco Sockets, Streams and Sessions
+/// can be explicity instantiated with a Poco::Net::Context or
+/// they can (more conveniently) employ a default SSL Client or
+/// Server Context.  For applications that implement
+/// Poco::Util::Application, default Context setup and configuration
+/// trivially done via config files. But, since ofBaseApp does not
+/// extend Poco::Util::Application, special care must be taken when
+/// creating and using Poco's default Client and Server Contexts.
 ///
-///         ofSSLManager allows the user to either accept the default
-///         ofSSLManager Client and Server Contexts or provide a custom
-///         Context during by calling ofSSLManager::initializeClient(...) or
-///         ofSSLManager::initializeServer(...).  The user must take care
-///         to interact with the default SSL Context management system via
-///         the ofSSLManager singleton, rather than calling
-///         Poco::Net::SSLManager directly.
+/// ofSSLManager adds a layer between the openFrameworks user and
+/// the Poco::Net::SSLManager to ensure that the default contexts
+/// are configured in an openFrameworks-friendly way (e.g. providing
+/// a default location for certificate authority files, SSL
+/// certificate and Private Key files, the default security settings
+/// and mechanisms for registering SSL verification event callbacks.
 ///
-///         Finally, in order to simplify the certificate verification
-///         process, ofSSLManager configures Contexts to seek their
-///         verification and private key passwords via an event callback.
-///         Thus, users wishing to manually verify Client and Server private
-///         key passwords, SSL certificates that are not automatically
-///         accepted based on the certificate authority settings, etc
-///         must add listeners for SSL verification callbacks BEFORE
-///         any calls to any of the following methods:
+/// ofSSLManager allows the user to either accept the default
+/// ofSSLManager Client and Server Contexts or provide a custom
+/// Context during by calling ofSSLManager::initializeClient(...) or
+/// ofSSLManager::initializeServer(...).  The user must take care
+/// to interact with the default SSL Context management system via
+/// the ofSSLManager singleton, rather than calling
+/// Poco::Net::SSLManager directly.
 ///
-///             ofSSLManager::defaultServerContext();
-///             ofSSLManager::defaultServerContext();
-///             ofSSLManager::initializeServer(...);
-///             ofSSLManager::initializeClient(...);
+/// Finally, in order to simplify the certificate verification
+/// process, ofSSLManager configures Contexts to seek their
+/// verification and private key passwords via an event callback.
+/// Thus, users wishing to manually verify Client and Server private
+/// key passwords, SSL certificates that are not automatically
+/// accepted based on the certificate authority settings, etc
+/// must add listeners for SSL verification callbacks BEFORE
+/// any calls to any of the following methods:
 ///
-///         Further information about registering these event callbacks can
-///         be found in the ofSSLManager::registerAllEvents(),
-///         ofSSLManager::registerClientEvents(), and
-///         ofSSLManager::registerServerEvents() method documentation.
+/// ~~~{.cpp}
+///    ofSSLManager::defaultServerContext();
+///    ofSSLManager::defaultServerContext();
+///    ofSSLManager::initializeServer(...);
+///    ofSSLManager::initializeClient(...);
+/// ~~~
 ///
+/// Further information about registering these event callbacks can
+/// be found in the ofSSLManager::registerAllEvents(),
+/// ofSSLManager::registerClientEvents(), and
+/// ofSSLManager::registerServerEvents() method documentation.
 class ofSSLManager
 {
 public:
@@ -208,23 +210,26 @@ public:
     static void unregisterServerEvents(ListenerClass* listener);
 
     /// \brief The default location of the certificate authority bundle.
-    /// \details The certificate authority bundle can be extracted from
-    ///        The cURL website.  More information is here:
-    ///        http://curl.haxx.se/docs/caextract.html
+    ///
+    /// The certificate authority bundle can be extracted from
+    /// The cURL website.  More information is here:
+    /// http://curl.haxx.se/docs/caextract.html
     static const std::string DEFAULT_CA_LOCATION;
 
     /// \brief The default location of the private key pem file.
-    /// \details SSL Certificate files and their private key counterparts
-    ///        can be purchased or self-signed.  More information on
-    ///        generating self-signed certificates is here:
-    ///        https://devcenter.heroku.com/articles/ssl-certificate-self
+    ///
+    /// SSL Certificate files and their private key counterparts
+    /// can be purchased or self-signed.  More information on
+    /// generating self-signed certificates is here:
+    /// https://devcenter.heroku.com/articles/ssl-certificate-self
     static const std::string DEFAULT_PRIVATE_KEY_FILE;
 
     /// \brief The default location of the certificate pem file.
-    /// \details SSL Certificate files and their private key counterparts
-    ///        can be purchased or self-signed.  More information on
-    ///        generating self-signed certificates is here:
-    ///        https://devcenter.heroku.com/articles/ssl-certificate-self
+    ///
+    /// SSL Certificate files and their private key counterparts
+    /// can be purchased or self-signed.  More information on
+    /// generating self-signed certificates is here:
+    /// https://devcenter.heroku.com/articles/ssl-certificate-self
     static const std::string DEFAULT_CERTIFICATE_FILE;
 
 private:
@@ -236,19 +241,21 @@ private:
     ~ofSSLManager();
 
     /// \brief An instance of the ofSSLManager.
-    /// \details All static methods access the singleton via this method.
-    ///        Usually there is no need for a user to call this method.
+    ///
+    /// All static methods access the singleton via this method.
+    /// Usually there is no need for a user to call this method.
+    ///
     /// \returns A reference to the singleton.
     static ofSSLManager& instance();
 
+    /// \brief True iff ofSSLManager initialized its own Client Context.
     bool _clientContextInitialized;
-        ///< \brief True iff ofSSLManager initialized its own Client Context.
 
+    /// \brief True iff ofSSLManager initialized its own Server Context.
     bool _serverContextInitialized;
-        ///< \brief True iff ofSSLManager initialized its own Server Context.
 
+    /// \brief Allow Poco::SingletonHolder to call the private constructor.
     friend class Poco::SingletonHolder<ofSSLManager>;
-        ///< \brief Allow Poco::SingletonHolder to call the private constructor.
 
 };
 
