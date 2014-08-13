@@ -80,10 +80,10 @@ void ofSSLManager::initializeClient(Poco::Net::Context::Ptr pContext)
             caLocation = "";
         }
 
-        Poco::Net::Context::Ptr pContext = new Poco::Net::Context(Poco::Net::Context::CLIENT_USE,
-                                                                  caLocation);
+        Poco::Net::Context::Ptr _pContext = new Poco::Net::Context(Poco::Net::Context::CLIENT_USE,
+                                                                   caLocation);
 
-        Poco::Net::SSLManager::instance().initializeClient(0, 0, pContext);
+        Poco::Net::SSLManager::instance().initializeClient(0, 0, _pContext);
         manager._clientContextInitialized = true;
     }
 }
@@ -111,12 +111,12 @@ void ofSSLManager::initializeServer(Poco::Net::Context::Ptr pContext)
             caLocation = "";
         }
 
-        Poco::Net::Context::Ptr pContext = new Poco::Net::Context(Poco::Net::Context::SERVER_USE,
-                                                                  privateKeyFile,
-                                                                  certificateFile,
-                                                                  caLocation);
+        Poco::Net::Context::Ptr _pContext = new Poco::Net::Context(Poco::Net::Context::SERVER_USE,
+                                                                   privateKeyFile,
+                                                                   certificateFile,
+                                                                   caLocation);
 
-        Poco::Net::SSLManager::instance().initializeServer(0, 0, pContext);
+        Poco::Net::SSLManager::instance().initializeServer(0, 0, _pContext);
         manager._serverContextInitialized = true;
     }
 }
