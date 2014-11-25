@@ -64,7 +64,7 @@ void ofSSLManager::initializeClient(Poco::Net::Context::Ptr pContext)
 {
     ofSSLManager& manager = ofSSLManager::instance();
 
-    if(0 != pContext)
+    if (0 != pContext)
     {
         Poco::Net::SSLManager::instance().initializeClient(0, 0, pContext);
         manager._clientContextInitialized = true;
@@ -93,7 +93,7 @@ void ofSSLManager::initializeServer(Poco::Net::Context::Ptr pContext)
 {
     ofSSLManager& manager = ofSSLManager::instance();
 
-    if(0 != pContext)
+    if (0 != pContext)
     {
         Poco::Net::SSLManager::instance().initializeServer(0, 0, pContext);
         manager._serverContextInitialized = true;
