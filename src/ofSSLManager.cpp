@@ -134,3 +134,51 @@ ofSSLManager& ofSSLManager::instance()
 {
     return *singleton.get();
 }
+
+
+std::string ofSSLManager::verificationModeToString(Poco::Net::Context::VerificationMode mode)
+{
+    switch (mode)
+    {
+        case Poco::Net::Context::VERIFY_NONE:
+            return "VERIFY_NONE";
+        case Poco::Net::Context::VERIFY_RELAXED:
+            return "VERIFY_RELAXED";
+        case Poco::Net::Context::VERIFY_STRICT:
+            return "VERIFY_STRICT";
+        case Poco::Net::Context::VERIFY_ONCE:
+            return "VERIFY_ONCE";
+    }
+
+    return "UNKNOWN";
+}
+
+
+Poco::Net::Context::VerificationMode ofSSLManager::verificationModeFromString(const std::string& mode)
+{
+    if (mode == "VERIFY_NONE")
+    {
+        return Poco::Net::Context::VERIFY_NONE;
+    }
+    else if (mode == "VERIFY_RELAXED")
+    {
+        return Poco::Net::Context::VERIFY_RELAXED;
+    }
+    else if (mode == "VERIFY_STRICT")
+    {
+        return Poco::Net::Context::VERIFY_STRICT;
+    }
+    else if (mode == "VERIFY_ONCE")
+    {
+        return Poco::Net::Context::VERIFY_ONCE;
+    }
+    else
+    {
+        ofLogWarning("ofSSLManager::verificationModeFromString") << "Unrecognized verification mode: " << mode;
+        return Poco::Net::Context::VERIFY_STRICT;
+    }
+}
+
+
+
+

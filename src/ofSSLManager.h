@@ -232,6 +232,16 @@ public:
     /// https://devcenter.heroku.com/articles/ssl-certificate-self
     static const std::string DEFAULT_CERTIFICATE_FILE;
 
+    /// \brief Get the string representation of a verification mode.
+    /// \param mode The mode to convert.
+    /// \returns The string representation.  Returns "UNKNOWN" if unknown.
+    static std::string verificationModeToString(Poco::Net::Context::VerificationMode mode);
+
+    /// \brief Get the verification mode from a string.
+    /// \param mode The mode string to convert.
+    /// \returns The verification mode. Returns VERIFY_STRICT if unknown.
+    static Poco::Net::Context::VerificationMode verificationModeFromString(const std::string& mode);
+
 private:
     ofSSLManager();
     ofSSLManager(const ofSSLManager&);
