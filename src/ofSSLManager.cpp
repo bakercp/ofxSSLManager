@@ -75,7 +75,7 @@ void ofSSLManager::initializeClient(Poco::Net::Context::Ptr pContext)
 
         Poco::File caLocationFile(caLocation);
 
-        if(!caLocationFile.exists())
+        if (!caLocationFile.exists())
         {
             caLocation = "";
         }
