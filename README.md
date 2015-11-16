@@ -1,4 +1,4 @@
 ofxSSLManager
 =============
 
-SSL Management.
+SSL certificate Management.
