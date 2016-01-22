@@ -152,12 +152,12 @@ public:
     /// ~~~{.cpp}
     ///    ofSSLManager::registerAllEvents(this);
     /// ~~~
-    template<class ListenerClass>
+    template <class ListenerClass>
     static void registerAllEvents(ListenerClass* listener);
 
     /// \brief Unregister the listener class for all Client and Server SSL events.
     /// \param listener A pointer to the class containing all callbacks.
-    template<class ListenerClass>
+    template <class ListenerClass>
     static void unregisterAllEvents(ListenerClass* listener);
 
     /// \brief Register the listener class for all Client SSL events.
@@ -176,12 +176,12 @@ public:
     /// ~~~{.cpp}
     ///    ofSSLManager::registerClientEvents(this);
     /// ~~~
-    template<class ListenerClass>
+    template <class ListenerClass>
     static void registerClientEvents(ListenerClass* listener);
 
     /// \brief Unregister the listener class for all Client SSL events.
     /// \param listener A pointer to the class containing all callbacks.
-    template<class ListenerClass>
+    template <class ListenerClass>
     static void unregisterClientEvents(ListenerClass* listener);
 
     /// \brief Register the listener class for all Server SSL events.
@@ -201,12 +201,12 @@ public:
     /// ~~~{.cpp}
     ///     ofSSLManager::registerServerEvents(this);
     /// ~~~
-    template<class ListenerClass>
+    template <class ListenerClass>
     static void registerServerEvents(ListenerClass* listener);
 
     /// \brief Unregister the listener class for all Server SSL events.
     /// \param listener A pointer to the class containing all callbacks.
-    template<class ListenerClass>
+    template <class ListenerClass>
     static void unregisterServerEvents(ListenerClass* listener);
 
     /// \brief The default location of the certificate authority bundle.
@@ -270,7 +270,7 @@ private:
 };
 
 
-template<class ListenerClass>
+template <class ListenerClass>
 void ofSSLManager::registerAllEvents(ListenerClass* listener)
 {
     ofSSLManager::instance();
@@ -281,7 +281,7 @@ void ofSSLManager::registerAllEvents(ListenerClass* listener)
 }
 
 
-template<class ListenerClass>
+template <class ListenerClass>
 void ofSSLManager::unregisterAllEvents(ListenerClass* listener)
 {
     ofSSLManager::instance();
@@ -292,7 +292,7 @@ void ofSSLManager::unregisterAllEvents(ListenerClass* listener)
 }
 
 
-template<class ListenerClass>
+template <class ListenerClass>
 void ofSSLManager::registerClientEvents(ListenerClass* listener)
 {
     ofSSLManager::instance();
@@ -302,7 +302,7 @@ void ofSSLManager::registerClientEvents(ListenerClass* listener)
 }
 
 
-template<class ListenerClass>
+template <class ListenerClass>
 void ofSSLManager::unregisterClientEvents(ListenerClass* listener)
 {
     ofSSLManager::instance();
@@ -312,7 +312,7 @@ void ofSSLManager::unregisterClientEvents(ListenerClass* listener)
 }
 
 
-template<class ListenerClass>
+template <class ListenerClass>
 void ofSSLManager::registerServerEvents(ListenerClass* listener)
 {
     ofSSLManager::instance();
@@ -322,7 +322,7 @@ void ofSSLManager::registerServerEvents(ListenerClass* listener)
 }
 
 
-template<class ListenerClass>
+template <class ListenerClass>
 void ofSSLManager::unregisterServerEvents(ListenerClass* listener)
 {
     ofSSLManager::instance();
