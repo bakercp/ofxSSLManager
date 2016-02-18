@@ -122,7 +122,7 @@ public:
     ///        function immediately in the ofBaseApp::setup() function.
     ///        Otherwise, ofSSLManager::initializeSlient() will be
     ///        configured with the ofSSLManager default settings.
-    static void initializeServer(Poco::Net::Context::Ptr pContext = 0);
+    static void initializeServer(Poco::Net::Context::Ptr pContext = nullptr);
 
     /// \brief Initialize a SSL Client Context.
     /// \param pContext A Poco::Net::Context::Ptr to set as the default.
@@ -132,7 +132,7 @@ public:
     ///        function immediately in the ofBaseApp::setup() function.
     ///        Otherwise, ofSSLManager::initializeClient() will be
     ///        configured with the ofSSLManager default settings.
-    static void initializeClient(Poco::Net::Context::Ptr pContext = 0);
+    static void initializeClient(Poco::Net::Context::Ptr pContext = nullptr);
 
     /// \brief Register the listener class for all Client and Server SSL events.
     /// \param listener A pointer to the class containing all callbacks.
