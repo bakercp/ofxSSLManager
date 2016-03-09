@@ -31,31 +31,28 @@ const std::string ofSSLManager::DEFAULT_PRIVATE_KEY_FILE  = "ssl/privateKey.pem"
 const std::string ofSSLManager::DEFAULT_CERTIFICATE_FILE  = "ssl/certificate.pem";
 
 
-ofSSLManager::ofSSLManager():
-    _clientContextInitialized(false),
-    _serverContextInitialized(false)
+ofSSLManager::ofSSLManager()
 {
-    Poco::Net::SSLManager::instance();
+    Poco::Net::initializeSSL();
 }
 
 
 ofSSLManager::~ofSSLManager()
 {
-//    // TODO: required if ssl manager is not integrated into the core
-//    Poco::Net::SSLManager::instance().shutdown();
+    Poco::Net::uninitializeSSL();
 }
 
 
 Poco::Net::Context::Ptr ofSSLManager::getDefaultServerContext()
 {
-    initializeServer(); // make sure it's initialized with something
+    initializeServer(nullptr); // make sure it's initialized with something
     return Poco::Net::SSLManager::instance().defaultServerContext();
 }
 
 
 Poco::Net::Context::Ptr ofSSLManager::getDefaultClientContext()
 {
-    initializeClient(); // make sure it's initialized with something
+    initializeClient(nullptr); // make sure it's initialized with something
     return Poco::Net::SSLManager::instance().defaultClientContext();
 }
 
@@ -64,9 +61,11 @@ void ofSSLManager::initializeClient(Poco::Net::Context::Ptr pContext)
 {
     ofSSLManager& manager = ofSSLManager::instance();
 
-    if (0 != pContext)
+    if (!pContext.isNull())
     {
-        Poco::Net::SSLManager::instance().initializeClient(0, 0, pContext);
+        Poco::Net::SSLManager::instance().initializeClient(nullptr,
+                                                           nullptr,
+                                                           pContext);
         manager._clientContextInitialized = true;
     }
     else if (!manager._clientContextInitialized)
@@ -77,14 +76,21 @@ void ofSSLManager::initializeClient(Poco::Net::Context::Ptr pContext)
 
         if (!caLocationFile.exists())
         {
+            ofLogWarning("ofSSLManager::initializeClient") << "CA File not found.";
             caLocation = "";
         }
 
         Poco::Net::Context::Ptr _pContext = new Poco::Net::Context(Poco::Net::Context::CLIENT_USE,
                                                                    caLocation);
 
-        Poco::Net::SSLManager::instance().initializeClient(0, 0, _pContext);
+        Poco::Net::SSLManager::instance().initializeClient(nullptr,
+                                                           nullptr,
+                                                           _pContext);
         manager._clientContextInitialized = true;
+    }
+    else
+    {
+        ofLogVerbose("ofSSLManager::initializeClient") << "pContext exists or the manager has already been initialized.";
     }
 }
 
@@ -93,9 +99,11 @@ void ofSSLManager::initializeServer(Poco::Net::Context::Ptr pContext)
 {
     ofSSLManager& manager = ofSSLManager::instance();
 
-    if (0 != pContext)
+    if (!pContext.isNull())
     {
-        Poco::Net::SSLManager::instance().initializeServer(0, 0, pContext);
+        Poco::Net::SSLManager::instance().initializeServer(nullptr,
+                                                           nullptr,
+                                                           pContext);
         manager._serverContextInitialized = true;
     }
     else if (!manager._serverContextInitialized)
@@ -106,8 +114,9 @@ void ofSSLManager::initializeServer(Poco::Net::Context::Ptr pContext)
 
         Poco::File caLocationFile(caLocation);
 
-        if(!caLocationFile.exists())
+        if (!caLocationFile.exists())
         {
+            ofLogWarning("ofSSLManager::initializeClient") << "CA File not found.";
             caLocation = "";
         }
 
@@ -116,23 +125,22 @@ void ofSSLManager::initializeServer(Poco::Net::Context::Ptr pContext)
                                                                    certificateFile,
                                                                    caLocation);
 
-        Poco::Net::SSLManager::instance().initializeServer(0, 0, _pContext);
+        Poco::Net::SSLManager::instance().initializeServer(nullptr,
+                                                           nullptr,
+                                                           _pContext);
         manager._serverContextInitialized = true;
     }
-}
-
-
-namespace
-{
-    static Poco::SingletonHolder<ofSSLManager> singleton;
-    // We keep this in an anonymous namespace to ensure that everything is
-    // shut down correctly at the very end of the application lifecycle.
+    else
+    {
+        ofLogVerbose("ofSSLManager::initializeServer") << "pContext exists or the manager has already been initialized.";
+    }
 }
 
 
 ofSSLManager& ofSSLManager::instance()
 {
-    return *singleton.get();
+    static ofSSLManager manager;
+    return manager;
 }
 
 
@@ -178,7 +186,3 @@ Poco::Net::Context::VerificationMode ofSSLManager::verificationModeFromString(co
         return Poco::Net::Context::VERIFY_STRICT;
     }
 }
-
-
-
-

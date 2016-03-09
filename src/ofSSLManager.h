@@ -31,7 +31,6 @@
 #include "Poco/Delegate.h"
 #include "Poco/File.h"
 #include "Poco/SharedPtr.h"
-#include "Poco/SingletonHolder.h"
 #include "Poco/Net/Context.h"
 #include "Poco/Net/NetSSL.h"
 #include "Poco/Net/PrivateKeyPassphraseHandler.h"
@@ -244,8 +243,8 @@ public:
 
 private:
     ofSSLManager();
-    ofSSLManager(const ofSSLManager&);
-    ofSSLManager& operator = (const ofSSLManager&);
+    ofSSLManager(const ofSSLManager&) = delete;
+    ofSSLManager& operator = (const ofSSLManager&) = delete;
 
     /// \brief Destroys the ofSSLManager.
     ~ofSSLManager();
@@ -259,13 +258,10 @@ private:
     static ofSSLManager& instance();
 
     /// \brief True iff ofSSLManager initialized its own Client Context.
-    bool _clientContextInitialized;
+    bool _clientContextInitialized = false;
 
     /// \brief True iff ofSSLManager initialized its own Server Context.
-    bool _serverContextInitialized;
-
-    /// \brief Allow Poco::SingletonHolder to call the private constructor.
-    friend class Poco::SingletonHolder<ofSSLManager>;
+    bool _serverContextInitialized = false;
 
 };
 
