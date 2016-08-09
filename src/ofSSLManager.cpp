@@ -144,7 +144,7 @@ ofSSLManager& ofSSLManager::instance()
 }
 
 
-std::string ofSSLManager::verificationModeToString(Poco::Net::Context::VerificationMode mode)
+std::string ofSSLManager::to_string(Poco::Net::Context::VerificationMode mode)
 {
     switch (mode)
     {
@@ -157,12 +157,10 @@ std::string ofSSLManager::verificationModeToString(Poco::Net::Context::Verificat
         case Poco::Net::Context::VERIFY_ONCE:
             return "VERIFY_ONCE";
     }
-
-    return "UNKNOWN";
 }
 
 
-Poco::Net::Context::VerificationMode ofSSLManager::verificationModeFromString(const std::string& mode)
+Poco::Net::Context::VerificationMode ofSSLManager::from_string(const std::string& mode)
 {
     if (mode == "VERIFY_NONE")
     {

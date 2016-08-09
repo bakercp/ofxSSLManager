@@ -234,12 +234,12 @@ public:
     /// \brief Get the string representation of a verification mode.
     /// \param mode The mode to convert.
     /// \returns The string representation.  Returns "UNKNOWN" if unknown.
-    static std::string verificationModeToString(Poco::Net::Context::VerificationMode mode);
+    static std::string to_string(Poco::Net::Context::VerificationMode mode);
 
     /// \brief Get the verification mode from a string.
     /// \param mode The mode string to convert.
     /// \returns The verification mode. Returns VERIFY_STRICT if unknown.
-    static Poco::Net::Context::VerificationMode verificationModeFromString(const std::string& mode);
+    static Poco::Net::Context::VerificationMode from_string(const std::string& mode);
 
 private:
     ofSSLManager();
