@@ -7,6 +7,8 @@ A system for managing SSL certificates via Poco.
 
 A system for managing SSL certificates via Poco.
 
+Typically, clients, such as those in ofxHTTP work best with up-to-date CA Certificate bundles.  An fairly recent example is included in example folder. For up-to-date certificates (or if you just want to generate your own for security reasons), check out [this page](http://curl.haxx.se/docs/caextract.html) for more info on creating your own Certificate Authority PEM (e.g. `ca.pem`).
+
 ## Getting Started
 
 To get started, generate the example project files using the openFrameworks [Project Generator](http://openframeworks.cc/learning/01_basics/how_to_add_addon_to_project/).
