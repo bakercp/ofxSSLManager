@@ -1,11 +1,11 @@
 ofxSSLManager
 =============
 
-SSL certificate Management.
+A system for managing SSL certificates via Poco.
 
 ## Description
 
-SSL certificate Management.
+A system for managing SSL certificates via Poco.
 
 ## Getting Started
 
