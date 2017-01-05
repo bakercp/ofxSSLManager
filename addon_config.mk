@@ -4,3 +4,5 @@ meta:
 	ADDON_AUTHOR = bakercp
 	ADDON_TAGS = "ssl" "openssl"
 	ADDON_URL = http://github.com/bakercp/ofxSSLManager
+common:
+	ADDON_DEPENDENCIES = ofxPoco
