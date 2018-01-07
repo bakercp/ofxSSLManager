@@ -6,6 +6,7 @@
 
 
 #include "ofSSLManager.h"
+#include "ofLog.h"
 
 
 const std::string ofSSLManager::DEFAULT_CA_LOCATION       = "ssl/cacert.pem";
