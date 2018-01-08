@@ -6,6 +6,7 @@
 
 
 #include "ofSSLManager.h"
+#include "ofLog.h"
 
 
 const std::string ofSSLManager::DEFAULT_CA_LOCATION       = "ssl/cacert.pem";
@@ -139,6 +140,9 @@ std::string ofSSLManager::to_string(Poco::Net::Context::VerificationMode mode)
         case Poco::Net::Context::VERIFY_ONCE:
             return "VERIFY_ONCE";
     }
+    
+    ofLogWarning("ofSSLManager::to_string") << "Unknown verification mode.";
+    return "UNKNOWN";
 }
 
 
