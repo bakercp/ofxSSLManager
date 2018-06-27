@@ -53,16 +53,31 @@ void ofSSLManager::initializeClient(Poco::Net::Context::Ptr pContext)
     }
     else if (!manager._clientContextInitialized)
     {
-        std::string caLocation = ofToDataPath(DEFAULT_CA_LOCATION, true);
+        std::string caLocation = "";
+        
+        std::filesystem::path localCACertPath = ofToDataPath(DEFAULT_CA_LOCATION, true);
 
-        Poco::File caLocationFile(caLocation);
-
-        if (!caLocationFile.exists())
+        std::filesystem::path sharedCACertPath = std::filesystem::path(__FILE__).parent_path().parent_path();
+        sharedCACertPath /= "shared";
+        sharedCACertPath /= "data";
+        sharedCACertPath /= DEFAULT_CA_LOCATION;
+        
+        std::cout << sharedCACertPath << std::endl;
+        
+        if (std::filesystem::exists(localCACertPath))
         {
-            ofLogWarning("ofSSLManager::initializeClient") << "CA File not found.";
-            caLocation = "";
+            caLocation = localCACertPath.string();
         }
-
+        else if (std::filesystem::exists(sharedCACertPath))
+        {
+            ofLogWarning("ofSSLManager::initializeClient") << "CA File not found @ " << localCACertPath.string() << ". Using " << sharedCACertPath.string() << ".";
+            caLocation = sharedCACertPath.string();
+        }
+        else
+        {
+            ofLogWarning("ofSSLManager::initializeClient") << "CA File not found. Please refer to the ofxSSLManager documentation.";
+        }
+        
         Poco::Net::Context::Ptr _pContext = new Poco::Net::Context(Poco::Net::Context::CLIENT_USE,
                                                                    caLocation);
 

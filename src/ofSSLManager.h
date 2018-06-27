@@ -193,7 +193,7 @@ public:
     /// \brief The default location of the certificate authority bundle.
     ///
     /// The certificate authority bundle can be extracted from
-    /// The cURL website.  More information is here:
+    /// The cURL website. More information is here:
     /// http://curl.haxx.se/docs/caextract.html
     static const std::string DEFAULT_CA_LOCATION;
 
