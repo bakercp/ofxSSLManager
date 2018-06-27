@@ -1,17 +1,27 @@
-ofxSSLManager
-=============
+# ofxSSLManager
 
-A system for managing SSL certificates via Poco.
+A [openFrameworks](http://openframeworks.cc) addon for managing SSL connections.
 
 ## Description
 
 A system for managing SSL certificates via Poco.
 
-Typically, clients, such as those in ofxHTTP work best with up-to-date CA Certificate bundles.  An fairly recent example is included in example folder. For up-to-date certificates (or if you just want to generate your own for security reasons), check out [this page](http://curl.haxx.se/docs/caextract.html) for more info on creating your own Certificate Authority PEM (e.g. `ca.pem`).
+Typically, clients, such as those in `ofxHTTP` and `ofxSMTP` work best with up-to-date CA Certificate bundles. An fairly recent example is can be found at `example/bin/data/ssl/cacert.pem` and `shared/data/ssl/cacert.pem`. For up-to-date certificates (or if you just want to generate your own for security reasons), check out [this page](http://curl.haxx.se/docs/caextract.html) for more info on creating your own Certificate Authority PEM (e.g. `cacert.pem`).
 
 ## Getting Started
 
-To get started, generate the example project files using the openFrameworks [Project Generator](http://openframeworks.cc/learning/01_basics/how_to_add_addon_to_project/).
+To get started, generate the example project files using the openFrameworks [Project Generator](http://openframeworks.cc/learning/01_basics/how_to_add_addon_to_project/). The example included in this addon does not do much. TO see the addon in action, check out the examples in [ofxHTTP](https://github.com/bakercp/ofxHTTP) or [ofxSMTP](https://github.com/bakercp/ofxSMTP).
+
+Project that use this addon should have ensure that the required certificates are included in their project data. For standard SSL communication, place a `cacert.pem` in the `bin/data/ssl/` folder of your openFrameworks project (see the example). Alternatively, if no `bin/data/ssl/cacert.pem` is found, the addon will search in `ofxSSLManager/shared/data/ssl/cacert.pem`. To set a custom location, you can initialize a custom SSL context:
+
+```c++
+Poco::Net::Context::Ptr pContext = ... ;
+
+// Initialize the custom SSL context.
+// See https://pocoproject.org/docs/Poco.Net.Context.html
+
+ofxSSLManager::initializeClient(pContext);
+```
 
 ## Documentation
 
@@ -37,14 +47,14 @@ This project uses Semantic Versioning, although strict adherence will only come 
 
 ## Licensing
 
-See `LICENSE.md`.
+See [LICENSE.md](LICENSE.md).
 
 ## Contributing
 
 Pull Requests are always welcome, so if you make any improvements please feel free to float them back upstream :)
 
-1. Fork this repository.
-2. Create your feature branch (`git checkout -b my-new-feature`).
-3. Commit your changes (`git commit -am 'Add some feature'`).
-4. Push to the branch (`git push origin my-new-feature`).
-5. Create new Pull Request.
+1.  Fork this repository.
+2.  Create your feature branch (`git checkout -b my-new-feature`).
+3.  Commit your changes (`git commit -am 'Add some feature'`).
+4.  Push to the branch (`git push origin my-new-feature`).
+5.  Create new Pull Request.
