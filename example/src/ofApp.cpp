@@ -15,7 +15,6 @@ void ofApp::setup()
 
     // etc.  Usually used internally w/ ofxSMTP, ofxHTTP, etc.
 
-    std::cout << "Nothing to see here." << std::endl;
 }
 
 
