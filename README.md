@@ -44,7 +44,7 @@ The `stable` branch of this repository is meant to be compatible with the openFr
 
 The `master` branch of this repository is meant to be compatible with the openFrameworks [master branch](https://github.com/openframeworks/openFrameworks/tree/master).
 
-Some past openFrameworks releases are supported via [releases](releases/), but only the [stable branch](tree/stable) and the [master branch](tree/master) are actively supported.
+Some past openFrameworks releases are supported via [releases](../../releases/), but only the [stable branch](../../tree/stable) and the [master branch](../../tree/master) are actively supported.
 
 ## Versioning
 
