@@ -15,12 +15,17 @@ To get started, generate the example project files using the openFrameworks [Pro
 Project that use this addon should have ensure that the required certificates are included in their project data. For standard SSL communication, place a `cacert.pem` in the `bin/data/ssl/` folder of your openFrameworks project (see the example). Alternatively, if no `bin/data/ssl/cacert.pem` is found, the addon will search in `ofxSSLManager/shared/data/ssl/cacert.pem`. To set a custom location, you can initialize a custom SSL context:
 
 ```c++
-Poco::Net::Context::Ptr pContext = ... ;
+void ofApp::setup()
+{
+  Poco::Net::Context::Ptr pContext = ... ;
 
-// Initialize the custom SSL context.
-// See https://pocoproject.org/docs/Poco.Net.Context.html
+  // Initialize the custom SSL context.
+  // See https://pocoproject.org/docs/Poco.Net.Context.html
 
-ofxSSLManager::initializeClient(pContext);
+  ofxSSLManager::initializeClient(pContext);
+
+  // ...
+}
 ```
 
 ## Documentation
