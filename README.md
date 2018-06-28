@@ -1,10 +1,8 @@
 # ofxSSLManager
 
-A [openFrameworks](http://openframeworks.cc) addon for managing SSL connections.
+An [openFrameworks](http://openframeworks.cc) addon for managing SSL connections.
 
 ## Description
-
-A system for managing SSL certificates via Poco.
 
 Typically, clients, such as those in `ofxHTTP` and `ofxSMTP` work best with up-to-date CA Certificate bundles. An fairly recent example is can be found at `example/bin/data/ssl/cacert.pem` and `shared/data/ssl/cacert.pem`. For up-to-date certificates (or if you just want to generate your own for security reasons), check out [this page](http://curl.haxx.se/docs/caextract.html) for more info on creating your own Certificate Authority PEM (e.g. `cacert.pem`).
 
