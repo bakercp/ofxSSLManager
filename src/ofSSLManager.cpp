@@ -61,9 +61,7 @@ void ofSSLManager::initializeClient(Poco::Net::Context::Ptr pContext)
         sharedCACertPath /= "shared";
         sharedCACertPath /= "data";
         sharedCACertPath /= DEFAULT_CA_LOCATION;
-        
-        std::cout << sharedCACertPath << std::endl;
-        
+
         if (std::filesystem::exists(localCACertPath))
         {
             caLocation = localCACertPath.string();
